@@ -1,5 +1,4 @@
-import React from 'react-native';
-import { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { KEY_STORE_AUTH, store_auth } from '../stores/store_auth';
 import { AppScreenProps } from '../@types/type_navigation';

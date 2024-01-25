@@ -1,6 +1,5 @@
-import React from 'react-native';
+import React, { useMemo, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { useMemo, useState } from 'react';
 import {
   Text,
   View,
@@ -54,6 +53,7 @@ function Screen1({ navigation }: AppScreenProps<'Screen1'>) {
       <ScrollView keyboardShouldPersistTaps="always">
         <Text>Email:</Text>
         <TextInput
+          testID="username"
           editable={!login.isPending}
           value={username}
           style={s.input}
@@ -62,6 +62,7 @@ function Screen1({ navigation }: AppScreenProps<'Screen1'>) {
         <Spacer />
         <Text>Password:</Text>
         <TextInput
+          testID="password"
           editable={!login.isPending}
           value={password}
           style={s.input}

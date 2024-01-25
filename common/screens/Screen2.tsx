@@ -4,17 +4,17 @@ import {
   View,
   Button,
   ScrollView,
-  Pressable,
   StyleSheet,
   ActivityIndicator,
 } from 'react-native';
 import { AppScreenProps } from '../@types/type_navigation';
-import { MyNote, NoteResponse } from '../@types/type_note';
+import { NoteResponse } from '../@types/type_note';
 import { useQuery } from '@tanstack/react-query';
 import { fetchNotes } from '../../features/api_notes';
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useRef } from 'react';
 import Spacer from '../components/Spacer';
+import NoteList from '../components/NoteList';
 
 function Screen2(props: AppScreenProps<'Screen2'>) {
   const { navigation } = props;
@@ -24,11 +24,6 @@ function Screen2(props: AppScreenProps<'Screen2'>) {
     queryKey: ['notes'],
     queryFn: fetchNotes,
   });
-
-  const onItemPress = (note: MyNote) => {
-    const { id, body } = note;
-    navigation.navigate('Screen3', { id, body });
-  };
 
   const onAddNewNote = () => {
     navigation.navigate('Screen3');
@@ -51,18 +46,7 @@ function Screen2(props: AppScreenProps<'Screen2'>) {
       <Button title="+ Add Note" onPress={onAddNewNote} />
       <ScrollView contentContainerStyle={s.container_scroll}>
         {isPending ? <ActivityIndicator animating /> : null}
-        {data &&
-          data.items.map(n => (
-            <Pressable
-              key={n.id}
-              android_ripple={{
-                color: 'cyan',
-              }}
-              style={s.item_note}
-              onPress={() => onItemPress(n)}>
-              <Text>{n.body.substring(0, 16)}</Text>
-            </Pressable>
-          ))}
+        <NoteList data={data?.items || []} />
         {!isPending && !data?.items.length ? (
           <Text>No notes, press "+ Add Note" to create one.</Text>
         ) : null}
