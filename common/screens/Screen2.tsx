@@ -3,7 +3,6 @@ import {
   Text,
   View,
   Button,
-  ScrollView,
   StyleSheet,
   ActivityIndicator,
 } from 'react-native';
@@ -44,13 +43,11 @@ function Screen2(props: AppScreenProps<'Screen2'>) {
       <Text style={s.h1}>My Notes:</Text>
       <Spacer />
       <Button title="+ Add Note" onPress={onAddNewNote} />
-      <ScrollView contentContainerStyle={s.container_scroll}>
-        {isPending ? <ActivityIndicator animating /> : null}
-        <NoteList data={data?.items || []} />
-        {!isPending && !data?.items.length ? (
-          <Text>No notes, press "+ Add Note" to create one.</Text>
-        ) : null}
-      </ScrollView>
+      {isPending ? <ActivityIndicator animating /> : null}
+      <NoteList data={data?.items || []} />
+      {!isPending && !data?.items.length ? (
+        <Text>No notes, press "+ Add Note" to create one.</Text>
+      ) : null}
     </View>
   );
 }
@@ -63,9 +60,6 @@ const s = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     color: '#000',
-  },
-  container_scroll: {
-    paddingVertical: 16,
   },
   item_note: {
     backgroundColor: '#fff',

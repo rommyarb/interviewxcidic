@@ -125,6 +125,8 @@ function Screen3(props: AppScreenProps<'Screen3'>) {
     <View style={s.container}>
       <Text>{title}</Text>
       <TextInput
+        multiline
+        autoFocus
         editable={!is_processing}
         value={body}
         onChangeText={v => setBody(v)}
@@ -161,6 +163,7 @@ const s = StyleSheet.create({
     backgroundColor: '#FFFFDD',
     borderWidth: 1,
     borderColor: '#ccc',
+    height: 150,
   },
 });
 

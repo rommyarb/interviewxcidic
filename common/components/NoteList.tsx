@@ -11,6 +11,7 @@ function NoteList({ data }: { data: MyNote[] }) {
 
   return (
     <FlatList
+      contentContainerStyle={s.container}
       data={data}
       keyExtractor={item => item.id}
       renderItem={({ item: n }) => (
@@ -30,6 +31,9 @@ function NoteList({ data }: { data: MyNote[] }) {
 }
 
 const s = StyleSheet.create({
+  container: {
+    paddingVertical: 16,
+  },
   item_note: {
     backgroundColor: '#fff',
     borderWidth: 1,
